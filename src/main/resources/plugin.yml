@@ -1,0 +1,49 @@
+name: VerCode-EventSwiateczny
+version: '1.0-SNAPSHOT'
+main: pl.verCodeEventSwiateczny.Main
+api-version: '1.18'
+load: STARTUP
+authors: [ xMateusZG ]
+description: VerCode | Plugin event swiąteczny
+website: dc.vercode.pl
+
+commands:
+  eventswiateczny:
+    permission: vercode.eventswiateczny.use
+    aliases: [vercode-eventswiateczny, ver-eventswiateczny, vercode-swieta]
+
+  prezenty:
+    permission: vercode.eventswiateczny.use
+    aliases: [prezent-drop, drop-z-prezentu]
+
+
+permissions:
+  vercode.eventswiateczny.*:
+    description: Wszystkie permisje
+    default: op
+    children:
+      vercode.eventswiateczny.use: true
+      vercode.eventswiateczny.patyk: true
+      vercode.eventswiateczny.time: true
+      vercode.eventswiateczny.region: true
+      vercode.eventswiateczny.reload: true
+
+  vercode.eventswiateczny.use:
+    description: Podstawowa permisja
+    default: true
+
+  vercode.eventswiateczny.patyk:
+    description: Daje patyk do regionów
+    default: op
+
+  vercode.eventswiateczny.time:
+    description: Ustawia czas prezentów
+    default: op
+
+  vercode.eventswiateczny.region:
+    description: Zarządza regionami
+    default: op
+
+  vercode.eventswiateczny.reload:
+    description: Przeładowuje plugin
+    default: op

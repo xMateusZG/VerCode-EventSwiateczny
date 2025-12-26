@@ -1,0 +1,110 @@
+####################################################################################################
+#																							       #
+#  /$$    /$$                     /$$$$$$                  /$$               /$$$$$$$  /$$         #
+# | $$   | $$                    /$$__  $$                | $$              | $$__  $$| $$         #
+# | $$   | $$ /$$$$$$   /$$$$$$ | $$  \__/  /$$$$$$   /$$$$$$$  /$$$$$$     | $$  \ $$| $$         #
+# |  $$ / $$//$$__  $$ /$$__  $$| $$       /$$__  $$ /$$__  $$ /$$__  $$    | $$$$$$$/| $$         #
+#  \  $$ $$/| $$$$$$$$| $$  \__/| $$      | $$  \ $$| $$  | $$| $$$$$$$$    | $$____/ | $$         #
+#   \  $$$/ | $$_____/| $$      | $$    $$| $$  | $$| $$  | $$| $$_____/    | $$      | $$         #
+#    \  $/  |  $$$$$$$| $$      |  $$$$$$/|  $$$$$$/|  $$$$$$$|  $$$$$$$ /$$| $$      | $$$$$$$$   #
+#     \_/    \_______/|__/       \______/  \______/  \_______/ \_______/|__/|__/      |________/   #
+#																							       #
+# Plugin na event swiąteczny                                                                       #
+# Plik configuracyjny: config.yml                                                                  #
+#                                                                                                  #
+# Autor: xMateusZG                                                                                 #
+#																							       #
+####################################################################################################
+
+# {permission} - permisja (przykladowo jak chce sie ustawić jakiej permisji sie nie posiada)
+# {prefix} - prefix przy wiadomosci
+# {region} - nazwa regionu (przykladowo gdy sie usunie jakis region)
+
+# Ustawienia prezentow
+gift_settings:
+  # Co ile ma dostawać sie prezenty do EQ? (sekundy = s, minuty = m, itd)
+  # Mozesz to również ustawić w MC za pomocą: /eventswiateczny time "Czas"
+  gift_delivery_time: 5m, 10s
+  # Co ma być prezentem
+  gift_block:
+    block: PLAYER_HEAD
+    # Opcja dziala tylko gdy blok to głowa gracza (jezeli bedzie
+    # inny block to nie zadziala przypadku nie bedzie działać)
+    head-url: "https://www.minecraftskins.com/uploads/skins/2025/12/19/flat-christmas-gift--red--23729574.png?v938"
+
+
+# Regiony w którym będą respić sie prezenty (na ziemi)
+# (Mozna dodawać nowe regiony - bezlimitu)
+gift_regions:
+  # 1 region:
+  testowy_region:
+    # Nazwa regionu
+    region_name: "testowy region"
+    # Czas respienia się prezentów
+    # Mozesz to ustawić w MC za pomoca: /eventswiateczny region time <nazwa regionu> <czas>
+    time: 1m, 10s
+    # Ile prezentow na raz ma sie respic
+    # Mozesz to ustawic za pomaca: /eventswiateczny region gift_once {nazwa} {ilosc}
+    gifts_once: 2
+    # Pozycje
+    positions:
+      position1: 100, 100, 100 # Kordy 1 pozycji
+      position2: -100, 0, -100 # Kordy 2 pozycji
+    # Bloki na których mogą respić się prezenty:
+    blocks:
+      - GRASS_BLOCK
+      - SNOW
+
+# Aby stworzyć region w grze:
+# Krok 1: Użyj komendy /eventswiateczny patyk
+# Krok 2: Zaznacz:
+#   Lewym przyciskiem myszy - 1 pozycja regionu
+#   Prawym przyciskiem myszy - 2 pozycja regionu
+# Krok 3: Wpisz /eventswiateczny stworz {nazwa regionu}
+
+
+# Wiadomosci
+messages:
+  prefix: "&8[&3VerCode.PL &7Event swiąteczny &8]&r"
+  no_premission: "&4[&cBłąd&8] &cBrak permisji &8({permission})!"
+  plugin_reload: "{prefix} &aPlugin przeładowany"
+  regions:
+    create: "{prefix} &aStworzyłeś nowy region! &2({region})"
+    delete: "{prefix} &cUsunołeś region! &4({region})"
+    set_time: "{prefix} &aUstawiłeś czas na: {time} &2({region})"
+    set_gift-once: "{prefix} &aUstawiłeś ilośc respienia prezentów na raz na: {gift_once} &2({region})"
+    give_stick: "{prefix} &aOtrzymałeś patyk!"
+  player:
+    give_gift_time:
+      title: "{prefix}"
+      subtitle: "&a+1 Prezent!"
+      chat: "{prefix} &aOtrzymałeś prezent za czas!"
+    extracting_gift:
+      title: "{prefix}"
+      subtitle: "&a+1 PREZENT"
+      chat: "{prefix} &aWydobyłeś prezent!"
+    opening_gift: "{prefix} &aOtworzyłeś prezent. &6Trafiony item to: {item}"
+
+# Drop z prezentow
+drop:
+  # Nazwa gui
+  gui_name: "{prefix}"
+  # Wielkosc gui (poprzez sloty) - najlepiej nie zmieniac
+  slots_gui: 54
+  # Itemy w gui:
+  items:
+    1:
+      # Jak ma wygladac item w gui:
+      item: DIAMOND_SWORD
+      name: "Diamentowy miecz"
+      # Nazwa itemu w wiadomosci jezeli wylosuje sie ten item!
+      # (Zmienna: {item}
+      name_messages: "&3Diamentowy Miecz"
+      lore:
+        - ""
+      # (Do wybrania true/false)
+      glow: false
+      # Jaka komenda/komendy maja wykonywac sie po wylosowaniu itemu w prezenie
+      # (Czyli jezeli trafi sie ten item to jaka komenda sie wykona dla gracza zeby otrzymal item)
+      commands:
+        - give {player} diamond_sword 1
